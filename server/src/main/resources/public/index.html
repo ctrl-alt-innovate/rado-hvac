@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  
+  <title>Rado HVAC</title>
+  <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+<link rel="manifest" href="/site.webmanifest">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <script>
+    function toggleDropdown() {
+    const dropdown = document.getElementById("servicesDropdown");
+
+    if (dropdown.style.display === "block") {
+      // If open, close and navigate
+      dropdown.style.display = "none";
+      window.location.assign("index.html#services");
+    } else {
+      // If closed, just open it
+      dropdown.style.display = "block";
+    }
+  }
+    // Optional: Close dropdown if clicked outside
+    window.onclick = function(event) {
+      if (!event.target.matches('.dropdown-toggle')) {
+        const dropdown = document.getElementById("servicesDropdown");
+        if (dropdown && dropdown.style.display === "block") {
+          dropdown.style.display = "none";
+        }
+      }
+    }
+  </script>
+
+
+  <!--  
+  <script type="module">
+    // Import the functions you need from the SDKs you need
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/11.9.0/firebase-app.js";
+    import { getAnalytics } from "https://www.gstatic.com/firebasejs/11.9.0/firebase-analytics.js";
+    import { collection, addDoc, getFirestore } from "https://www.gstatic.com/firebasejs/11.9.0/firebase-firestore.js";
+    // TODO: Add SDKs for Firebase products that you want to use
+    // https://firebase.google.com/docs/web/setup#available-libraries
+  
+    // Your web app's Firebase configuration
+    // For Firebase JS SDK v7.20.0 and later, measurementId is optional
+    const firebaseConfig = {
+      apiKey: "AIzaSyAoz9QdlGyCUXYS1A1Q8lz4zikDD7zcL1o",
+      authDomain: "sdsdsd-a8c1a.firebaseapp.com",
+      databaseURL: "https://sdsdsd-a8c1a-default-rtdb.firebaseio.com",
+      projectId: "sdsdsd-a8c1a",
+      storageBucket: "sdsdsd-a8c1a.firebasestorage.app",
+      messagingSenderId: "541990057286",
+      appId: "1:541990057286:web:17128653bf145d2d2ae147",
+      measurementId: "G-28Q0SSF437"
+    };
+  
+    // Initialize Firebase
+    const app = initializeApp(firebaseConfig);
+    const analytics = getAnalytics(app);
+  
+
+
+ 
+
+  const db = getFirestore(app)
+  const form = document.getElementById('contact-form');
+  
+  form.addEventListener('submit', async (e) => {
+    e.preventDefault();
+
+    const name = form.name.value;
+    const email = form.email.value;
+    const phone = form.phone.value
+    const message = form.message.value;
+    
+
+    try {
+      await addDoc(collection(db, "messages"), {
+        name,
+        email,
+        message,
+        phone,
+        timestamp: new Date()
+      });
+
+      alert("Message sent successfully!");
+      form.reset();
+    } catch (error) {
+      console.error("Error sending message: ", error);
+      alert("There was an error sending your message.");
+    }
+  });
+</script>
+-->
+
+  <header>
+    <nav>
+      <div class="logo">
+        <a href="#home">
+          <img src="rado-logo.jpg" alt="Rado HVAC Logo" class="logo-img">
+        </a>
+      </div>
+      <div class="nav-dropdown">
+        <button class="nav-link dropdown-toggle" onclick="toggleDropdown()">Services</button>
+        <div class="dropdown-menu" id="servicesDropdown">
+          <a href="ac-installation.html" class="dropdown-item">AC Installation</a>
+          <a href="service.html" class="dropdown-item">Service & Repair</a>
+          <a href="maintenance.html" class="dropdown-item">Maintenance</a>
+        </div>
+      </div>
+      
+      <a href="#about" class="nav-link">About</a>
+      <a href="#contact" class="nav-link">Contact</a>
+    </nav>
+  </header>
+
+  <section class="hero">
+    <h2>Your Comfort, Our Priority</h2>
+    <p>Proudly serving the <span class="heating">heating</span> and <span class="cooling">cooling</span> needs of Central Arkansas since 2024</p>
+    <div class="call-button-wrapper">
+      <a href="tel:5019096470" class="call-button">Call Now</a>
+    </div>
+    <img src="thermostat_1.png" alt="HVAC technician working" class="hero-image">
+  </section>
+
+  <section id="services" class="services">
+    <h2>Our Services</h2>
+    <div class="service-list">
+      <div class="service">
+        <img src="ducts.png" alt="AC Installation Icon" class="service-icon">
+        <h3>AC Installation</h3>
+        <p> We install energy-efficient AC systems for your home or business, including ductless mini-split setups. Whether it's residential, commercial, or zoned cooling — we've got you covered.</p>
+        <a href="ac-installation.html" class="service-btn">Learn More</a>
+      </div>
+      <div class="service">
+        <img src="unit_closed.png" alt="Repair Icon" class="service-icon">
+        <h3>Service and Repair</h3>
+        <p>Fast and reliable HVAC repairs for all system types — residential or commercial. We diagnose and fix issues to get your comfort back quickly.</p>
+        <a href="service.html" class="service-btn">Learn More</a>
+      </p>
+      </div>
+      <div class="service">
+        <img src="mini_split.png" alt="Maintenance Icon" class="service-icon">
+        <h3>HVAC Maintenance</h3>
+        <p> Prevent breakdowns with regular maintenance. We clean HVAC systems, improve efficiency, and extend equipment lifespan.</p>
+        <a href="maintenance.html" class="service-btn">Learn More</a>
+      </div>
+    </div>
+  </section>
+ 
+  <section class="about" id="about">
+    <h2>About Rado HVAC</h2>
+    <p>
+      At Rado HVAC, we’ve been proudly serving Central Arkansas with top-quality heating, cooling, and ventilation solutions. 
+      Whether you're a homeowner or business owner, we bring experience, honesty, and reliable service to every job—big or small.
+    </p>
+    <p>
+      Our certified technicians specialize in residential and commercial systems, including mini-splits, ensuring year-round comfort 
+      for your home or office. Customer satisfaction is our top priority.
+    </p>
+    <img src="unit_open.png" alt="Our team at work" class="about-image">
+  </section>
+
+  <section id="contact" class="contact">
+    <h2>Contact Us</h2>
+      <form id="contact-form">
+        <input type="text"  name="name" id="name" placeholder="Your Name" required>
+        <input type="email" name="email" id="email" placeholder="Your Email" required>
+        <input type="tel" name="phone" id="phone" placeholder="Your Phone Number" required>
+        <input type="hidden" name="_captcha" value="false">
+        <textarea name="message" id="message" placeholder="How can we help you today?" required></textarea>
+        <button type="submit">Send Message</button>
+      </form>
+  </section>
+
+  <footer>
+    <p>&copy; 2025 Rado HVAC. All rights reserved.</p>
+  </footer>
+
+  <script>
+    document.getElementById("contact-form").addEventListener("submit", function (e) {
+      e.preventDefault(); // prevent normal form submission
+
+      const form = e.target;
+
+      const data = {
+        name: form.name.value,
+        email: form.email.value,
+        phone: form.phone.value,
+        message: form.message.value,
+      };
+
+      fetch("/api/messages", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(data),
+      })
+        .then((res) => {
+          if (res.ok) {
+            console.log("Success!!!!");
+            form.reset();
+          } else {
+            console.log("Error sending message");
+          }
+        })
+        .catch((err) => {
+          console.error("Fetch error:", err);
+          document.getElementById("formStatus").textContent = "Network error.";
+        });
+    });
+  </script>
+
+
+</body>
+</html>

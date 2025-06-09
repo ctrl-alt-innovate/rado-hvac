@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Rado HVAC</title>
+  <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+<link rel="manifest" href="/site.webmanifest">
+  <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <script>
+        function toggleDropdown() {
+        const dropdown = document.getElementById("servicesDropdown");
+    
+        if (dropdown.style.display === "block") {
+          // If open, close and navigate
+          dropdown.style.display = "none";
+          window.location.assign("index.html#services");
+        } else {
+          // If closed, just open it
+          dropdown.style.display = "block";
+        }
+      }
+        // Optional: Close dropdown if clicked outside
+        window.onclick = function(event) {
+          if (!event.target.matches('.dropdown-toggle')) {
+            const dropdown = document.getElementById("servicesDropdown");
+            if (dropdown && dropdown.style.display === "block") {
+              dropdown.style.display = "none";
+            }
+          }
+        }
+      </script>
+
+      
+
+
+  <header>
+    <nav>
+      <div class="logo">
+        <a href="index.html">
+          <img src="rado-logo.jpg" alt="Rado HVAC Logo" class="logo-img">
+        </a>
+      </div>
+      <div class="nav-dropdown">
+        <button class="nav-link dropdown-toggle" onclick="toggleDropdown()">Services</button>
+        <div class="dropdown-menu" id="servicesDropdown">
+          <a href="ac-installation.html" class="dropdown-item">AC Installation</a>
+          <a href="service.html" class="dropdown-item">Service & Repair</a>
+          <a href="maintenance.html" class="dropdown-item">Maintenance</a>
+        </div>
+      </div>
+      
+      <a href="index.html#about" class="nav-link">About</a>
+      <a href="index.html#contact" class="nav-link">Contact</a>
+    </nav>
+  </header>
+<!-- Hero -->
+<section class="hero">
+      <h2>AC Installation</h2>
+      <p>Serving Central Arkansas with <span class="highlight-gold">expert</span> residential, commercial, and mini-split installation services.</p>
+      <img src="condenser_small.png" alt="AC Installation" class="hero-image"/>
+  </section>
+
+  <!-- Services Detail -->
+  <section class="services">
+    <div class="service-list">
+        <div class="service">
+            <img src="resedential_duct.png" alt="Maintenance Icon" class="service-icon">
+            <h3>Residential Installation</h3>
+            <p>Custom central AC installs designed for your home's size and efficiency needs.</p>
+            </div>
+        <div class="service">
+            <img src="package_unit.png" alt="Maintenance Icon" class="service-icon">
+            <h3>Commercial Installation</h3>
+            <p>Reliable cooling solutions for businesses, warehouses, and offices of all sizes.</p>
+        </div>
+        <div class="service">
+            <img src="mini_split_generated.png" alt="Maintenance Icon" class="service-icon">
+
+            <h3>Mini-Split Systems</h3>
+            <p>Ideal for garages, sunrooms, and ductless spaces — flexible, efficient comfort.</p>
+        </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer>
+    <p>&copy; 2025 Rado HVAC | All Rights Reserved</p>
+  </footer>
+
+</body>
+</html>

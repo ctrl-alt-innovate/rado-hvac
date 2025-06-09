@@ -1,0 +1,323 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+  
+  body {
+    font-family: Arial, sans-serif;
+    background-color: #f7f9fc;
+    color: #333;
+    line-height: 1.6;
+    font-size: 2rem;
+  }
+  
+  /* Header */
+  header {
+    background-color: #003366;
+    color: white;
+    padding: 1.5rem;
+    text-align: center;
+  }
+  
+  .logo-img {
+    height: 100px; /* Adjust this height as needed */
+    width: auto;
+    display: block;
+  }
+
+  .logo {
+    display: flex;
+    align-items: center;
+  }
+
+  nav {
+    margin-top: 0.5rem;
+    text-align: left;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 1rem 2rem;
+  }
+  
+  nav a {
+    color: white;
+    margin: 0 1rem;
+    text-decoration: none;
+  }
+  
+  /* Hero */
+  .hero {
+    background-color: #e6f0ff;
+    padding: 3rem 2rem;
+    text-align: center;
+    justify-content: center;
+    align-items: center;
+    
+
+  }
+  
+  .hero p {
+    font-size: 2rem;
+  }
+
+  .hero h2 {
+    color: #003366;
+    font-size: 3rem;
+    margin-bottom: 0.5rem;
+  }
+  .hero-image {
+    padding: 1rem;
+    max-width: 100%;
+    height: auto;
+    margin-top: 1.5rem;
+    border-radius: 8px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+   
+   
+    
+  }
+  .cooling {
+    color: #007BFF; /* blue */
+    font-weight: bold;
+  }
+  
+  .heating {
+    color: #FF5722; /* orange */
+    font-weight: bold;
+  }
+  .diagnostics {
+    color: #e6b800; /* orange */
+    font-weight: bold;
+  }
+  .investment {
+    color: #2e7d32;
+    font-weight: bold;
+  }
+  .highlight-gold {
+    color: #b8860b; /* Dark goldenrod */
+    font-weight: bold;
+  }
+  
+  /* Services */
+  .services {
+    padding: 3rem 2rem;
+    text-align: center;
+  }
+  
+  .nav-dropdown {
+    position: relative;
+    display: inline-block;
+  }
+  
+  .dropdown-toggle {
+    background: none;
+    border: none;
+    color: white;
+    font-size: inherit;
+    padding: 0.75rem 1.5rem;
+    cursor: pointer;
+  }
+  
+  .dropdown-toggle:hover,
+  .dropdown-toggle:focus {
+    background-color: #0077cc;
+  }
+  
+  .dropdown-menu {
+    display: none; /* Keep this */
+    position: absolute;
+    background-color: #003366;
+    min-width: 200px;
+    box-shadow: 0px 8px 16px rgba(0,0,0,0.2);
+    z-index: 1;
+    border-radius: 5px;
+  }
+  
+  .dropdown-item {
+    color: white;
+    padding: 0.75rem 1rem;
+    display: block;
+    text-decoration: none;
+  }
+  
+  .dropdown-item:hover {
+    background-color: #005fa3;
+  }
+  
+  /* Show menu on hover */
+  .nav-dropdown:hover .dropdown-menu {
+    display: block;
+  }
+  
+
+  .service-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 2rem;
+    justify-content: center;
+    margin-top: 2rem;
+  }
+  
+  .service {
+    background-color: #fff;
+    padding: 1.5rem;
+    border-radius: 8px;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+    width: 600px;
+  }
+
+  .service-btn {
+    display: inline-block;
+    margin-top: 0.5rem;
+    padding: 0.5rem 1rem;
+    background-color: #005baa;
+    color: white;
+    text-decoration: none;
+    border-radius: 5px;
+    transition: background-color 0.3s;
+  }
+  
+  .service-btn:hover {
+    background-color: #004080;
+  }
+  
+  
+  /* Contact */
+  .contact {
+    padding: 3rem 2rem;
+    background-color: #f0f4f8;
+    text-align: center;
+  }
+  
+  .contact form {
+    max-width: 500px;
+    margin: auto;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+  }
+  
+  .contact input,
+  .contact textarea, input {
+    padding: 0.75rem;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 2rem;
+    font-family: Arial, Helvetica, sans-serif;
+
+  }
+  
+  textarea {
+    font-family: inherit;
+  }
+  
+  .contact button {
+    padding: 0.75rem;
+    background-color: #003366;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    font-size: 2rem;
+    cursor: pointer;
+  }
+  
+  .contact button:hover {
+    background-color: #0055a5;
+  }
+  
+  /* Footer */
+  footer {
+    text-align: center;
+    padding: 1rem;
+    background-color: #003366;
+    color: white;
+    margin-top: 2rem;
+    font-size: 1rem;
+  }
+  
+  .call-button {
+    display: inline-block;
+    margin: 1.5rem;
+    font-size: 3rem;
+    padding: 0.75rem 1.5rem;
+    width: 400px;
+    background-color: #005baa;
+    color: white;
+    text-decoration: none;
+    border-radius: 6px;
+    font-weight: bold;
+    transition: background-color 0.3s ease;
+    text-align: center;
+  }
+  
+  .call-button:hover {
+    background-color: #004080;
+  }
+
+  .call-button-wrapper {
+    text-align: center;
+  }
+
+  .about {
+    background-color: #f7f7f7;
+    padding: 3rem 1rem;
+    text-align: center;
+  }
+  
+  .about h2 {
+    font-size: 3rem;
+    margin-bottom: 1rem;
+    color: #005baa;
+    text-align: center;
+    justify-content: center;
+    align-items: center;
+  }
+  
+  .about p {
+    max-width: 800px;
+    margin: 0 auto 1rem;
+    font-size: 1.1rem;
+    line-height: 1.6;
+  }
+
+  .about-image {
+    margin-top: 2rem;
+    max-width: 100%;
+    height: auto;
+    display: block;
+    margin: 2rem auto 0;
+    
+    border-radius: 8px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  }
+
+  .service-icon {
+    width: 500px;
+    height: 500px;
+    object-fit: contain;
+    display: block;
+    margin: 0 auto 1rem;
+  }
+  
+  .nav-link {
+    padding: 0.75rem 1.5rem;
+    color: white;
+    text-decoration: none;
+    border-radius: 6px;
+    transition: background-color 0.3s, color 0.3s;
+  }
+  
+  .nav-link:hover {
+    background-color: #0077cc;
+    color: #fff;
+  }
+  
+  /* Optional: active state */
+  .nav-link.active {
+    background-color: #005fa3;
+    color: #fff;
+  }
+
+  
+

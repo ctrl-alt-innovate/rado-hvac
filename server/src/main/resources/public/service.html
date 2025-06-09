@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  
+  <title>Rado HVAC</title>
+  <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+  <link rel="manifest" href="/site.webmanifest">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <script>
+        function toggleDropdown() {
+        const dropdown = document.getElementById("servicesDropdown");
+    
+        if (dropdown.style.display === "block") {
+          // If open, close and navigate
+          dropdown.style.display = "none";
+          window.location.assign("index.html#services");
+        } else {
+          // If closed, just open it
+          dropdown.style.display = "block";
+        }
+      }
+        // Optional: Close dropdown if clicked outside
+        window.onclick = function(event) {
+          if (!event.target.matches('.dropdown-toggle')) {
+            const dropdown = document.getElementById("servicesDropdown");
+            if (dropdown && dropdown.style.display === "block") {
+              dropdown.style.display = "none";
+            }
+          }
+        }
+      </script>
+  <header>
+    <nav>
+      <div class="logo">
+        <a href="index.html">
+          <img src="rado-logo.jpg" alt="Rado HVAC Logo" class="logo-img">
+        </a>
+      </div>
+      <div class="nav-dropdown">
+        <button class="nav-link dropdown-toggle" onclick="toggleDropdown()">Services</button>
+        <div class="dropdown-menu" id="servicesDropdown">
+          <a href="ac-installation.html" class="dropdown-item">AC Installation</a>
+          <a href="service.html" class="dropdown-item">Service & Repair</a>
+          <a href="maintenance.html" class="dropdown-item">Maintenance</a>
+        </div>
+      </div>
+      
+      <a href="index.html#about" class="nav-link">About</a>
+      <a href="index.html#contact" class="nav-link">Contact</a>
+    </nav>
+  </header>
+
+  <!-- Hero -->
+  <section class="hero">
+    <h2>AC Repair</h2>
+    <p>Reliable HVAC service and repair — including <span class="diagnostics">diagnostics</span> and fixes for fan motors, compressors, refrigerant leaks, electrical issues, and more.</p>
+    <img src="condenser_repair.png" alt="AC Repair" class="hero-image"/>
+  </section>
+
+  <!-- Services Detail -->
+  <section class="services">
+    <div class="service-list">
+        <div class="service">
+            <img src="multimeter.png" alt="Maintenance Icon" class="service-icon">
+            <h3>System Diagnostics & Troubleshooting</h3>
+            <p>We pinpoint the root cause of HVAC issues using advanced tools and thorough inspections — whether it's a faulty thermostat, clogged drain line, or refrigerant issue.</p>
+          </div>
+          
+          <div class="service">
+            <img src="fan_motor.png" alt="Maintenance Icon" class="service-icon">
+            <h3>Fan Motors & Compressors</h3>
+            <p>Our techs are trained to repair or replace worn-out fan motors and compressors, restoring airflow and cooling performance while extending equipment life.</p>
+          </div>
+          
+          <div class="service">
+            <img src="24_7.png" alt="Maintenance Icon" class="service-icon">
+            <h3>Emergency HVAC Repairs</h3>
+            <p>From no-cool calls to loud noises or system shutdowns, we respond quickly with dependable repair solutions that get your heating or cooling back on track.</p>
+          </div>
+          
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer>
+    <p>&copy; 2025 Rado HVAC | All Rights Reserved</p>
+  </footer>
+
+</body>
+</html>

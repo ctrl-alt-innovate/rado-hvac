@@ -319,5 +319,122 @@
     color: #fff;
   }
 
+  .contact-form label {
+  display: block;
+  margin-top: 15px;
+  font-weight: bold;
+}
+
+/* Review section wrapper */
+.reviews, .review-form {
+  max-width: 800px;
+  margin: 3rem auto;
+  padding: 2rem;
+  background-color: #f9f9f9;
+  border-radius: 12px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.05);
+}
+
+/* Section headers */
+.reviews h2, .review-form h3 {
+  font-size: 1.8rem;
+  margin-bottom: 1.5rem;
+  color: #333;
+}
+
+/* Form fields */
+.review-form input,
+.review-form textarea {
+  width: 100%;
+  padding: 0.75rem 1rem;
+  margin-bottom: 1rem;
+  border: 1px solid #ddd;
+  border-radius: 6px;
+  font-size: 1rem;
+  font-family: inherit;
+  box-sizing: border-box;
+}
+
+.review-form textarea {
+  height: 120px;
+  resize: vertical;
+}
+
+/* Submit button */
+.review-form button {
+  padding: 0.75rem 1.5rem;
+  background-color: #003366;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.review-form button:hover {
+  background-color: #0055aa;
+}
+
+/* Star rating */
+#star-rating {
+  display: flex;
+  align-items: center;
+  margin-bottom: 1rem;
+}
+
+#star-rating label {
+  margin-right: 0.5rem;
+  font-weight: bold;
+}
+
+#star-rating .star {
+  font-size: 1.5rem;
+  cursor: pointer;
+  color: #ccc;
+  margin-right: 4px;
+  transition: color 0.2s;
+}
+
+#star-rating .star.selected {
+  color: gold;
+}
+
+/* Displayed reviews */
+.review {
+  border-top: 1px solid #e0e0e0;
+  padding: 1rem 0;
+}
+
+.review:first-child {
+  border-top: none;
+}
+
+.review strong {
+  display: block;
+  font-size: 1.1rem;
+  color: #003366;
+}
+
+.review span {
+  color: gold;
+  font-size: 1.2rem;
+}
+
+.review p {
+  margin: 0.5rem 0;
+}
+
+.review small {
+  color: #666;
+  font-size: 0.875rem;
+}
+.review h2 {
+
+  font-weight: 600;
+  font-size: 2rem; /* Make name bigger */
+  color: #333;
+
+}
   
 

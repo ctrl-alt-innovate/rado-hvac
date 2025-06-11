@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Owner Login - Rado HVAC</title>
+  <link rel="stylesheet" href="style.css">
+  <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+<body>
+
+  <script>
+    function toggleDropdown() {
+      const dropdown = document.getElementById("servicesDropdown");
+      if (dropdown.style.display === "block") {
+        dropdown.style.display = "none";
+        window.location.assign("index.html#services");
+      } else {
+        dropdown.style.display = "block";
+      }
+    }
+
+    window.onclick = function(event) {
+      if (!event.target.matches('.dropdown-toggle')) {
+        const dropdown = document.getElementById("servicesDropdown");
+        if (dropdown && dropdown.style.display === "block") {
+          dropdown.style.display = "none";
+        }
+      }
+    };
+  </script>
+
+  <!-- Header -->
+  <header>
+    <nav>
+      <div class="logo">
+        <a href="index.html">
+          <img src="rado-logo.jpg" alt="Rado HVAC Logo" class="logo-img">
+        </a>
+      </div>
+      <div class="nav-dropdown">
+        <button class="nav-link dropdown-toggle" onclick="toggleDropdown()">Services</button>
+        <div class="dropdown-menu" id="servicesDropdown">
+          <a href="ac-installation.html" class="dropdown-item">AC Installation</a>
+          <a href="service.html" class="dropdown-item">Service & Repair</a>
+          <a href="maintenance.html" class="dropdown-item">Maintenance</a>
+        </div>
+      </div>
+      <a href="index.html#about" class="nav-link">About</a>
+      <a href="index.html#contact" class="nav-link">Contact</a>
+    </nav>
+  </header>
+
+  <!-- Login Form Styled Like Contact -->
+  <section class="contact">
+    <h2>Owner Login</h2>
+    <p>Secure access to your invoice dashboard.</p>
+
+    <form id="contact-form">
+      
+      <input type="text" id="username" name="username" placeholder="Enter username" required>
+
+      
+      <input type="password" id="password" name="password" placeholder="Enter password" required>
+
+      <button type="submit">Login</button>
+      <p id="loginError" class="form-error"></p>
+    </form>
+  </section>
+
+  <!-- Footer -->
+  <footer>
+    <p>&copy; 2025 Rado HVAC | All Rights Reserved</p>
+  </footer>
+
+  <script>
+    document.getElementById("contact-form").addEventListener("submit", async (e) => {
+      e.preventDefault();
+
+      const res = await fetch("/api/login", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          username: document.getElementById("username").value,
+          password: document.getElementById("password").value
+        })
+      });
+
+      if (res.ok) {
+        window.location.href = "/invoices.html";
+      } else {
+        document.getElementById("loginError").textContent = "Invalid credentials. Please try again.";
+      }
+    });
+  </script>
+
+</body>
+</html>

@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Rado HVAC - Invoices</title>
+  <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
+  <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png" />
+  <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png" />
+  <link rel="manifest" href="/site.webmanifest" />
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+  <script>
+    function toggleDropdown() {
+      const dropdown = document.getElementById("servicesDropdown");
+      if (dropdown.style.display === "block") {
+        dropdown.style.display = "none";
+        window.location.assign("index.html#services");
+      } else {
+        dropdown.style.display = "block";
+      }
+    }
+    window.onclick = function(event) {
+      if (!event.target.matches('.dropdown-toggle')) {
+        const dropdown = document.getElementById("servicesDropdown");
+        if (dropdown && dropdown.style.display === "block") {
+          dropdown.style.display = "none";
+        }
+      }
+    };
+  </script>
+
+  <!-- Header -->
+  <header>
+    <nav>
+      <div class="logo">
+        <a href="index.html">
+          <img src="rado-logo.jpg" alt="Rado HVAC Logo" class="logo-img" />
+        </a>
+      </div>
+      <div class="nav-dropdown">
+        <button class="nav-link dropdown-toggle" onclick="toggleDropdown()">Services</button>
+        <div class="dropdown-menu" id="servicesDropdown">
+          <a href="ac-installation.html" class="dropdown-item">AC Installation</a>
+          <a href="service.html" class="dropdown-item">Service & Repair</a>
+          <a href="maintenance.html" class="dropdown-item">Maintenance</a>
+        </div>
+      </div>
+      <a href="index.html#about" class="nav-link">About</a>
+      <a href="index.html#contact" class="nav-link">Contact</a>
+    </nav>
+  </header>
+
+  <!-- Invoice Form -->
+<section class="contact">
+  <h2>Send an Invoice</h2>
+  <form id="contact-form">
+    <label for="name">Client Name</label>
+    <input type="text" id="name" name="clientName" required />
+
+    <label for="email">Client Email</label>
+    <input type="email" id="email" name="clientEmail" required />
+
+    <div id="service-items">
+      <label>Services</label>
+      <div class="service-row">
+        <input type="text" class="service-name" placeholder="Service Name" required />
+        <input type="number" class="service-price" step="0.01" placeholder="Price ($)" required />
+        <button type="button" class="remove-service-btn">Remove service</button>
+      </div>
+    </div>
+
+    <button type="button" id="add-service-btn">Add Another Service</button>
+
+    <label>Total</label>
+    <input type="text" id="total" name="totalAmount" readonly />
+
+    <label for="invoiceDetails">Additional Details</label>
+    <textarea id="details" name="invoiceDetails" rows="4" placeholder="Any extra notes..."></textarea>
+
+    <button type="submit">Send Invoice</button>
+  </form>
+</section>
+
+  <!-- Footer -->
+  <footer>
+    <p>&copy; 2025 Rado HVAC | All Rights Reserved</p>
+  </footer>
+
+  <!-- JavaScript (to be implemented for POST request to backend) -->
+<script>
+  function updateTotal() {
+    const prices = document.querySelectorAll(".service-price");
+    let total = 0;
+    prices.forEach((input) => {
+      const value = parseFloat(input.value);
+      if (!isNaN(value)) {
+        total += value;
+      }
+    });
+    document.getElementById("total").value = total.toFixed(2);
+  }
+
+  document.getElementById("add-service-btn").addEventListener("click", () => {
+    const container = document.getElementById("service-items");
+    const row = document.createElement("div");
+    
+    row.className = "service-row";
+    row.innerHTML = `
+      <input type="text" class="service-name" placeholder="Service Name" required />
+      <input type="number" class="service-price" step="0.01" placeholder="Price ($)" required />
+      <button type="button" class="remove-service-btn">Remove service</button>
+    `;
+    container.appendChild(row);
+
+    // Attach event to new input
+    row.querySelector(".service-price").addEventListener("input", updateTotal);
+  });
+
+document.getElementById("service-items").addEventListener("click", function (e) {
+  if (e.target && e.target.matches("button.remove-service-btn")) {
+    const row = e.target.closest(".service-row");
+    if (document.querySelectorAll(".service-row").length > 1) {
+      row.remove();
+      updateTotal();
+    }
+  }
+});
+
+
+  // Update total when prices change
+  document.querySelectorAll(".service-price").forEach(input =>
+    input.addEventListener("input", updateTotal)
+  );
+
+
+
+  document.getElementById("contact-form").addEventListener("submit", function (e) {
+    e.preventDefault();
+
+    const services = Array.from(document.querySelectorAll(".service-row")).map(row => ({
+      name: row.querySelector(".service-name").value,
+      price: parseFloat(row.querySelector(".service-price").value || 0),
+    }));
+
+    const invoiceData = {
+      name: document.getElementById("name").value,
+      email: document.getElementById("email").value,
+      services: services,
+      total: parseFloat(document.getElementById("total").value),
+      details: document.getElementById("details").value,
+    };
+
+    fetch("/api/invoices", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(invoiceData),
+    })
+      .then((res) => {
+        if (res.ok) {
+          alert("Invoice sent successfully!");
+          document.getElementById("contact-form").reset();
+          document.getElementById("service-items").innerHTML = `
+            <label>Services</label>
+            <div class="service-row">
+              <input type="text" class="service-name" placeholder="Service Name" required />
+              <input type="number" class="service-price" step="0.01" placeholder="Price ($)" required />
+            </div>
+          `;
+          document.getElementById("add-service-btn").click(); // optional to auto-add another row
+          updateTotal();
+        } else {
+          alert("Failed to send invoice.");
+        }
+      })
+      .catch((error) => {
+        console.error("Error:", error);
+        alert("Something went wrong.");
+      });
+  });
+</script>
+
+
+</body>
+</html>

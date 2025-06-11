@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Rado HVAC - Reviews</title>
+  <meta name="description" content="Read real customer reviews for Rado HVAC. Trusted HVAC services in Central Arkansas with 5-star ratings for reliability, professionalism, and quality.">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+  <link rel="manifest" href="/site.webmanifest">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <script>
+    function toggleDropdown() {
+      const dropdown = document.getElementById("servicesDropdown");
+      if (dropdown.style.display === "block") {
+        dropdown.style.display = "none";
+        window.location.assign("index.html#services");
+      } else {
+        dropdown.style.display = "block";
+      }
+    }
+
+    window.onclick = function(event) {
+      if (!event.target.matches('.dropdown-toggle')) {
+        const dropdown = document.getElementById("servicesDropdown");
+        if (dropdown && dropdown.style.display === "block") {
+          dropdown.style.display = "none";
+        }
+      }
+    }
+  </script>
+
+  <!-- Header -->
+  <header>
+    <nav>
+      <div class="logo">
+        <a href="index.html">
+          <img src="rado-logo.jpg" alt="Rado HVAC Logo" class="logo-img">
+        </a>
+      </div>
+      <div class="nav-dropdown">
+        <button class="nav-link dropdown-toggle" onclick="toggleDropdown()">Services</button>
+        <div class="dropdown-menu" id="servicesDropdown">
+          <a href="ac-installation.html" class="dropdown-item">AC Installation</a>
+          <a href="service.html" class="dropdown-item">Service & Repair</a>
+          <a href="maintenance.html" class="dropdown-item">Maintenance</a>
+        </div>
+      </div>
+      <a href="index.html#about" class="nav-link">About</a>
+      <a href="reviews.html" class="nav-link">Reviews</a>
+      <a href="index.html#contact" class="nav-link">Contact</a>
+    </nav>
+  </header>
+
+  <!-- Hero -->
+  <section class="hero">
+    <h2>Customer Reviews</h2>
+    <p>See what our customers have to say — real feedback from home and business owners who trust Rado HVAC for quality work and honest service.</p>
+    <img src="review_stars.png" alt="5-Star Reviews" class="hero-image"/>
+  </section>
+
+  <!-- Reviews List -->
+  <section class="services">
+    <div class="service-list">
+      <div class="service">
+        <h3>"Fast, Reliable, and Affordable!"</h3>
+        <p>Rado HVAC got our AC back up and running the same day. Super professional and fair pricing. Highly recommend!</p>
+        <p><strong>- Jessica M., Benton, AR</strong></p>
+      </div>
+      <div class="service">
+        <h3>"Trustworthy and Thorough"</h3>
+        <p>I signed up for their maintenance plan and it's been a game-changer. They’re always on time and never push unnecessary work.</p>
+        <p><strong>- Chris D., Little Rock, AR</strong></p>
+      </div>
+      <div class="service">
+        <h3>"Excellent Service"</h3>
+        <p>We had a refrigerant leak and Rado found it fast. Clear explanation, great repair. I won’t use anyone else now.</p>
+        <p><strong>- Maria T., North Little Rock, AR</strong></p>
+      </div>
+    </div>
+    
+<section class="reviews">
+  <h2>Customer Reviews</h2>
+  <div id="review-list"></div>
+</section>
+
+  </section>
+  <!-- Review Submission Form -->
+<section class="review-form">
+  <h3>Leave a Review</h3>
+  <form id="reviewForm">
+    <input type="text" id="name" placeholder="Your name" required>
+    <input type="text" id="location" placeholder="Your city or area" required>
+
+    <div id="star-rating">
+      <label>Rating:</label>
+      <span class="star" data-value="1">&#9733;</span>
+      <span class="star" data-value="2">&#9733;</span>
+      <span class="star" data-value="3">&#9733;</span>
+      <span class="star" data-value="4">&#9733;</span>
+      <span class="star" data-value="5">&#9733;</span>
+    </div>
+
+    <textarea id="content" placeholder="Your review" required></textarea>
+    <button type="submit">Submit Review</button>
+  </form>
+</section>
+<!--<script>
+  const form = document.getElementById('reviewForm');
+  const status = document.getElementById('reviewStatus');
+  const submittedReviews = document.getElementById('submittedReviews');
+
+  form.addEventListener('submit', function(event) {
+    event.preventDefault();
+
+    const name = form.name.value.trim();
+    const location = form.location.value.trim();
+    const rating = form.rating.value.trim();
+    const message = form.message.value.trim();
+
+    if (!name || !location || !rating || !message) {
+      status.textContent = "Please fill out all fields.";
+      return;
+    }
+
+    // Create review card
+    const reviewCard = document.createElement('div');
+    reviewCard.className = 'service';
+    reviewCard.innerHTML = `
+      <h3>${name} (${location})</h3>
+      <p><strong>Rating:</strong> ${'★'.repeat(rating)}${'☆'.repeat(5 - rating)}</p>
+      <p>${message}</p>
+    `;
+
+    submittedReviews.prepend(reviewCard); // Add on top
+    form.reset();
+    status.textContent = "Review submitted successfully!";
+  });
+</script>-->
+<script>
+document.addEventListener('DOMContentLoaded', () => {
+  const reviewList = document.getElementById('review-list');
+  const form = document.getElementById('reviewForm');
+  const stars = document.querySelectorAll('.star');
+  let selectedRating = 0;
+
+  // Star rating logic
+  stars.forEach(star => {
+    star.addEventListener('click', () => {
+      selectedRating = parseInt(star.getAttribute('data-value'));
+      stars.forEach(s => {
+        s.classList.toggle('selected', parseInt(s.getAttribute('data-value')) <= selectedRating);
+      });
+    });
+  });
+
+  // Load reviews
+  fetch('/api/reviews')
+    .then(res => res.json())
+    .then(data => {
+      data.forEach(review => {
+        const div = document.createElement('div');
+        div.className = 'review';
+        div.innerHTML = `
+          <h2>${review.name}</h2> from ${review.location}<br>
+          <span>${'★'.repeat(review.rating)}${'☆'.repeat(5 - review.rating)}</span>
+          <p>${review.content}</p>
+          <small>${new Date(review.timestamp).toLocaleString()}</small>
+        `;
+        reviewList.appendChild(div);
+      });
+    });
+
+  // Submit review
+  form.addEventListener('submit', (e) => {
+    e.preventDefault();
+
+    if (selectedRating === 0) {
+      alert('Please select a rating.');
+      return;
+    }
+
+    const review = {
+      name: document.getElementById('name').value,
+      location: document.getElementById('location').value,
+      content: document.getElementById('content').value,
+      rating: selectedRating
+    };
+
+    fetch('/api/reviews', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(review)
+    })
+    .then(res => res.json())
+    .then(() => {
+      alert('Review submitted!');
+      location.reload();
+    })
+    .catch(err => {
+      console.error('Error submitting review:', err);
+      alert('Failed to submit review');
+    });
+  });
+});
+</script>
+
+
+  <!-- Footer -->
+  <footer>
+    <p>&copy; 2025 Rado HVAC | All Rights Reserved</p>
+  </footer>
+</body>
+</html>

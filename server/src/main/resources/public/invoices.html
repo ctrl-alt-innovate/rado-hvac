@@ -84,6 +84,31 @@
   </form>
 </section>
 
+
+  <!-- Invoices Table -->
+<section class="contact">
+  <h2>Submitted Invoices</h2>
+  <div class="invoice-table-wrapper">
+    <table class="invoice-table">
+      <thead>
+        <tr>
+          <th>Client</th>
+          <th>Email</th>
+          <th>Services</th>
+          <th>Total ($)</th>
+          <th>Details</th>
+        </tr>
+      </thead>
+      <tbody id="invoice-table-body">
+        <!-- Invoices will be injected here -->
+      </tbody>
+    </table>
+  </div>
+</section>
+
+
+
+
   <!-- Footer -->
   <footer>
     <p>&copy; 2025 Rado HVAC | All Rights Reserved</p>
@@ -91,6 +116,15 @@
 
   <!-- JavaScript (to be implemented for POST request to backend) -->
 <script>
+
+  
+  
+  
+  
+  
+  
+  
+  
   function updateTotal() {
     const prices = document.querySelectorAll(".service-price");
     let total = 0;
@@ -171,6 +205,7 @@ document.getElementById("service-items").addEventListener("click", function (e) 
           `;
           document.getElementById("add-service-btn").click(); // optional to auto-add another row
           updateTotal();
+          fetchInvoices();
         } else {
           alert("Failed to send invoice.");
         }
@@ -180,6 +215,42 @@ document.getElementById("service-items").addEventListener("click", function (e) 
         alert("Something went wrong.");
       });
   });
+
+    function fetchInvoices() {
+  fetch('/api/invoices')
+    .then(res => res.json())
+    .then(data => {
+      const tbody = document.getElementById('invoice-table-body');
+      tbody.innerHTML = ''; // clear current rows
+      data.forEach(invoice => {
+        const servicesList = (invoice.services || []).map(s => {
+          const name = s.name || '';
+          const price = (s.price ?? 0).toFixed(2);
+          return `${name} ($${price})`;
+        }).join('<br>');
+        const row = document.createElement('tr');
+        row.innerHTML = `
+          <td>${invoice.name || ''}</td>
+          <td>${invoice.email || ''}</td>
+          <td>${servicesList}</td>
+          <td>$${(invoice.total ?? 0).toFixed(2)}</td>
+          <td>${invoice.details || ''}</td>
+        `;
+        tbody.appendChild(row);
+      });
+    })
+    .catch(err => {
+      console.error('Failed to load invoices:', err);
+    });
+};
+
+// Fetch invoices on load
+document.addEventListener('DOMContentLoaded', fetchInvoices);
+
+  
+
+
+
 </script>
 
 

@@ -16,6 +16,7 @@ public class InvoiceService {
     }
 
     public Invoice saveInvoice(Invoice invoice) {
+
         Invoice saved = invoiceRepository.save(invoice);
 
         String subject = "Invoice for Order at Rado HVAC";

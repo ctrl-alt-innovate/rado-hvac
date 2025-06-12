@@ -1,5 +1,6 @@
 package com.evanwahrmund.server;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 
 import java.math.BigDecimal;
@@ -19,6 +20,7 @@ public class Invoice {
     private String details;
 
     @OneToMany(mappedBy = "invoice", cascade = CascadeType.ALL, orphanRemoval = true)
+    @JsonManagedReference
     private List<Service> services;
 
     public List<Service> getServices() {

@@ -36,4 +36,7 @@ public class MessageService {
     public List<Message> getAllMessages() {
         return messageRepository.findAll();
     }
+    public void deleteMessageById(Long id ) {
+        messageRepository.deleteById(id);
+    }
 }

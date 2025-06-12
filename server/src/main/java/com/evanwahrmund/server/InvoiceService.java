@@ -60,4 +60,7 @@ public class InvoiceService {
     public List<Invoice> getAllInvoices() {
         return invoiceRepository.findAll();
     }
+    public void deleteInvoiceById(Long id) {
+        invoiceRepository.deleteById(id);
+    }
 }

@@ -1,5 +1,6 @@
 package com.evanwahrmund.server;
 
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -22,5 +23,10 @@ public class MessageController {
     @GetMapping
     public List<Message> getMessages(){
         return messageService.getAllMessages();
+    }
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Void> deleteMessage(@PathVariable Long id) {
+        messageService.deleteMessageById(id);
+        return ResponseEntity.noContent().build();
     }
 }

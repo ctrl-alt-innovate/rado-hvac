@@ -7,10 +7,17 @@ import jakarta.servlet.http.HttpSession;
 import org.springframework.stereotype.Component;
 
 import java.io.IOException;
+import java.util.Set;
 
 @Component
 public class AuthFilter implements Filter {
 
+
+    private static final Set<String> protectedPaths = Set.of(
+            "/invoices.html",
+            "/messages-list.html",
+            "/review-list.html"
+    );
     @Override
     public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain)
             throws IOException, ServletException {
@@ -21,7 +28,7 @@ public class AuthFilter implements Filter {
 
         String path = req.getRequestURI();
 
-        if (path.contains("invoices.html")) {
+        if (protectedPaths.contains(path)) {
             if (session == null || session.getAttribute("username") == null) {
                 res.sendRedirect("/login.html");
                 return;

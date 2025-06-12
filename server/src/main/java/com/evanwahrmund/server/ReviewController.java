@@ -1,5 +1,6 @@
 package com.evanwahrmund.server;
 
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -24,4 +25,9 @@ public class ReviewController {
         return reviewService.getAllReviews();
     }
 
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Void> deleteReview(@PathVariable Long id) {
+        reviewService.deleteReviewById(id);
+        return ResponseEntity.noContent().build();
+    }
 }

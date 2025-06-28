@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Rado HVAC - Reviews</title>
+  <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
+  <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png" />
+  <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png" />
+  <link rel="manifest" href="/site.webmanifest" />
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+  <script>
+    function toggleDropdown() {
+      const dropdown = document.getElementById("servicesDropdown");
+      if (dropdown.style.display === "block") {
+        dropdown.style.display = "none";
+        window.location.assign("index.html#services");
+      } else {
+        dropdown.style.display = "block";
+      }
+    }
+    window.onclick = function(event) {
+      if (!event.target.matches('.dropdown-toggle')) {
+        const dropdown = document.getElementById("servicesDropdown");
+        if (dropdown && dropdown.style.display === "block") {
+          dropdown.style.display = "none";
+        }
+      }
+    };
+  </script>
+
+  <!-- Header -->
+  <header>
+    <nav>
+      <div class="logo">
+        <a href="index.html">
+          <img src="rado-logo.jpg" alt="Rado HVAC Logo" class="logo-img" />
+        </a>
+      </div>
+      <div class="nav-dropdown">
+        <button class="nav-link dropdown-toggle" onclick="toggleDropdown()">Services</button>
+        <div class="dropdown-menu" id="servicesDropdown">
+          <a href="ac-installation.html" class="dropdown-item">AC Installation</a>
+          <a href="service.html" class="dropdown-item">Service & Repair</a>
+          <a href="maintenance.html" class="dropdown-item">Maintenance</a>
+        </div>
+      </div>
+      <a href="index.html#about" class="nav-link">About</a>
+      <a href="reviews.html" class="nav-link">Reviews</a>
+      <a href="index.html#contact" class="nav-link">Contact</a>
+    </nav>
+  </header>
+
+  <!-- Buttons above table -->
+  <section class="contact" style="text-align:center; margin-bottom: 1.5rem;">
+    <button onclick="location.href='invoices.html'">View Invoices</button>
+    <button onclick="location.href='messages-list.html'">View Messages</button>
+  </section>
+
+  <!-- Reviews Table -->
+  <section class="contact">
+    <h2>Customer Reviews</h2>
+    <div class="invoice-table-wrapper">
+      <table class="invoice-table">
+        <thead>
+          <tr>
+            <th>Name</th>
+            <th>Location</th>
+            <th>Rating</th>
+            <th>Content</th>
+            <th>Date</th>
+            <th>Action</th>
+          </tr>
+        </thead>
+        <tbody id="reviews-table-body">
+          <!-- Reviews will be injected here -->
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer>
+    <p>&copy; 2025 Rado HVAC | All Rights Reserved</p>
+  </footer>
+
+  <!-- JavaScript to fetch and display reviews and delete them -->
+  <script>
+    function fetchReviews() {
+      fetch('/api/reviews')
+        .then(res => res.json())
+        .then(data => {
+          const tbody = document.getElementById('reviews-table-body');
+          tbody.innerHTML = '';
+          data.forEach(review => {
+            const row = document.createElement('tr');
+            row.innerHTML = `
+              <td>${review.name || ''}</td>
+              <td>${review.location || ''}</td>
+              <td>${review.rating !== undefined ? review.rating : ''}</td>
+              <td>${review.content || ''}</td>
+              <td>${review.timestamp ? new Date(review.timestamp).toLocaleDateString() : ''}</td>
+              <td>
+                <button class="delete-btn" data-id="${review.id}">Delete</button>
+              </td>
+            `;
+            tbody.appendChild(row);
+          });
+
+          // Attach delete button handlers
+          document.querySelectorAll('.delete-btn').forEach(button => {
+            button.addEventListener('click', function () {
+              const reviewId = this.getAttribute('data-id');
+              if (confirm('Are you sure you want to delete this review?')) {
+                deleteReview(reviewId);
+              }
+            });
+          });
+        })
+        .catch(err => {
+          console.error('Failed to load reviews:', err);
+        });
+    }
+
+    function deleteReview(id) {
+      fetch(`/api/reviews/${id}`, {
+        method: 'DELETE'
+      })
+        .then(res => {
+          if (res.ok) {
+            alert('Review deleted.');
+            fetchReviews();
+          } else {
+            alert('Failed to delete review.');
+          }
+        })
+        .catch(err => {
+          console.error('Error deleting review:', err);
+          alert('Error deleting review.');
+        });
+    }
+
+    document.addEventListener('DOMContentLoaded', fetchReviews);
+  </script>
+
+</body>
+</html>

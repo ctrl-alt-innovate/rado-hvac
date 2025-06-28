@@ -1,4 +1,5 @@
 package com.evanwahrmund.server;
+import com.fasterxml.jackson.annotation.JsonFormat;
 import jakarta.persistence.*;
 import java.time.LocalDateTime;
 
@@ -16,6 +17,13 @@ public class Message {
     private String phone;
     private String message;
 
+    @JsonFormat(pattern = "MM-dd-yyyy")
+    private LocalDateTime timestamp;
+
+    @PrePersist
+    protected void onCreate() {
+        timestamp = LocalDateTime.now();
+    }
 
     public Long getId() {
         return id;
@@ -57,5 +65,11 @@ public class Message {
         this.message = message;
     }
 
+    public LocalDateTime getTimestamp() {
+        return timestamp;
+    }
 
+    public void setTimestamp(LocalDateTime timestamp) {
+        this.timestamp = timestamp;
+    }
 }

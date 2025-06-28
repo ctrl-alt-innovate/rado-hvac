@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <title>Rado HVAC - Reviews</title>
   <meta name="description" content="Read real customer reviews for Rado HVAC. Trusted HVAC services in Central Arkansas with 5-star ratings for reliability, professionalism, and quality.">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <!--<meta name="viewport" content="width=device-width, initial-scale=1.0"> -->
   <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
   <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
   <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
@@ -59,7 +59,7 @@
   <section class="hero">
     <h2>Customer Reviews</h2>
     <p>See what our customers have to say — real feedback from home and business owners who trust Rado HVAC for quality work and honest service.</p>
-    <img src="review_stars.png" alt="5-Star Reviews" class="hero-image"/>
+    <img src="gold_stars.png" alt="5-Star Reviews" class="service-icon"/>
   </section>
 
   <!-- Reviews List -->
@@ -168,7 +168,7 @@ document.addEventListener('DOMContentLoaded', () => {
           <h2>${review.name}</h2> from ${review.location}<br>
           <span>${'★'.repeat(review.rating)}${'☆'.repeat(5 - review.rating)}</span>
           <p>${review.content}</p>
-          <small>${new Date(review.timestamp).toLocaleString()}</small>
+          <small>${new Date(review.timestamp).toLocaleDateString()}</small>
         `;
         reviewList.appendChild(div);
       });
